@@ -25,12 +25,16 @@ mouse = Controller()
 keyboard = KeyboardController()
 
 # Mouse sensitivity and deadzone settings
-base_sensitivity = 3  # Adjust for base speed
+sensitivity = 5.0  # Adjust for base speed
 deadzone = 0.05  # Ignore small movements
 smoothing_factor = 0.1  # Lower for faster response
 
 # Sensitivity for scrolling
-scroll_sensitivity = 1  # Adjust this for faster/slower scrolling
+scroll_sensitivity = 1.5  # Adjust this for faster/slower scrolling
+
+# Set up a clock to manage refresh rate
+clock = pygame.time.Clock()
+refresh_rate = 120
 
 # Threshold for L2 and R2 press
 trigger_threshold = 0.5  # Move this outside the loop for better readability
@@ -38,6 +42,8 @@ trigger_threshold = 0.5  # Move this outside the loop for better readability
 # Initialize position deltas for smooth movement
 x_velocity = 0
 y_velocity = 0
+right_stick_x_velocity = 0
+right_stick_y_velocity = 0
 l2_press = False
 r2_press = False
 
@@ -51,54 +57,43 @@ def exponential_sensitivity(raw_value, base_sensitivity, exponent=1):
 
 try:
     while True:
+        # Update the Pygame event queue to keep joystick data fresh
+        pygame.event.pump()
+        clock.tick(refresh_rate)
         # Poll events
         for event in pygame.event.get():
             # Handle JOYAXISMOTION for mouse control
             if event.type == pygame.JOYAXISMOTION:
-                if event.axis == 0:  # Left stick X-axis          
-                    raw_x = event.value
-                    # Apply dynamic sensitivity based on joystick intensity
-                    if abs(raw_x) > deadzone:
-                        scaled_sensitivity_x = exponential_sensitivity(raw_x, base_sensitivity)
-                        x_velocity = (raw_x * scaled_sensitivity_x) * smoothing_factor + x_velocity * (1 - smoothing_factor)
-                    else:
-                        x_velocity = 0  # Reset to zero within deadzone
-                elif event.axis == 1:  # Left stick Y-axis
-                    raw_y = event.value
-                    # Apply dynamic sensitivity based on joystick intensity
-                    if abs(raw_y) > deadzone:
-                        scaled_sensitivity_y = exponential_sensitivity(raw_y, base_sensitivity)
-                        y_velocity = (raw_y * scaled_sensitivity_y) * smoothing_factor + y_velocity * (1 - smoothing_factor)
-                    else:
-                        y_velocity = 0  # Reset to zero within deadzone
+                # Read the X and Y axis (usually axis 0 and 1 for left stick)
+                x_axis = controller.get_axis(0)  # Left stick X-axis
+                y_axis = controller.get_axis(1)  # Left stick Y-axis
+                
+                # Scale joystick values to mouse movement
+                # Joystick values are between -1 and 1; multiply by sensitivity
+                x_movement = int(x_axis * sensitivity)
+                y_movement = int(y_axis * sensitivity)
+                
+                # Move the mouse
+                if abs(x_movement) > 0.1 or abs(y_movement > 0.1):  # Add a deadzone for better control
+                    mouse.move(x_movement, y_movement)
 
                 # Scrolling with Right Stick
-                # Right stick X-axis (horizontal scrolling)
-                if event.axis == 2:
-                    raw_x = event.value
-                    if abs(raw_x) > deadzone:  # Only scroll if joystick is being pressed
-                        # Apply smoothing and scaling to the x-axis movement
-                        right_stick_x_velocity = (raw_x * scroll_sensitivity) * smoothing_factor + right_stick_x_velocity * (1 - smoothing_factor)
-                        # Scroll horizontally
-                        mouse.scroll(-right_stick_x_velocity, 0)
-                    else:
-                        # If joystick is in the neutral zone, stop scrolling
-                        right_stick_x_velocity = 0
+                # Right stick axes for scrolling
+                x_scroll = controller.get_axis(2)  # Right stick X-axis
+                y_scroll = controller.get_axis(3)  # Right stick Y-axis
 
-                # Right stick Y-axis (vertical scrolling)
-                elif event.axis == 3:
-                    raw_y = event.value
-                    if abs(raw_y) > deadzone:  # Only scroll if joystick is being pressed
-                        # Apply smoothing and scaling to the y-axis movement
-                        right_stick_y_velocity = (raw_y * scroll_sensitivity) * smoothing_factor + right_stick_y_velocity * (1 - smoothing_factor)
-                        # Scroll vertically
-                        mouse.scroll(0, right_stick_y_velocity)
-                    else:
-                        # If joystick is in the neutral zone, stop scrolling
-                        right_stick_y_velocity = 0
+                # Vertical scrolling
+                if abs(y_scroll) > 0.1:  # Add a deadzone for better control
+                    scroll_amount = int(y_scroll * scroll_sensitivity)
+                    mouse.scroll(0, -scroll_amount)
+                
+                # Horizontal scrolling
+                if abs(x_scroll) > 0.1:  # Add a deadzone for better control
+                    scroll_amount = int(x_scroll * scroll_sensitivity)
+                    mouse.scroll(scroll_amount, 0)
 
                 # Handle L2 and R2 (Triggers as buttons)
-                elif event.axis == 4:  # L2
+                if event.axis == 4:  # L2
                     if event.value > trigger_threshold:
                         l2_press = True
                     else:
@@ -168,6 +163,10 @@ try:
                     if event.button == 6: # Start
                         keyboard.press(Key.ctrl)
                         keyboard.press('s')
+                    if event.button == 9: # L1
+                        keyboard.press(Key.ctrl)
+                    if event.button == 10: # R1
+                        keyboard.press(Key.enter)
             elif event.type == pygame.JOYBUTTONUP:     
                 if l2_press:
                     if event.button == 0: # X with L2 pressed
@@ -207,13 +206,11 @@ try:
                     if event.button == 6: # Start
                         keyboard.release(Key.ctrl)
                         keyboard.release('s')
+                    if event.button == 9: # L1
+                        keyboard.release(Key.ctrl)
+                    if event.button == 10: # R1
+                        keyboard.release(Key.enter)
                 
-
-
-        # Move the mouse by the calculated velocity
-        if abs(x_velocity) > 0.01 or abs(y_velocity) > 0.01:  # Small threshold to prevent drift
-            mouse.move(x_velocity, y_velocity)
-        
         # Minimal delay to avoid excessive CPU usage
         time.sleep(0.001)
 
