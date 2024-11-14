@@ -71,7 +71,6 @@ try:
                 # Read the X and Y axis (usually axis 0 and 1 for left stick)
                 x_axis = controller.get_axis(0)  # Left stick X-axis
                 y_axis = controller.get_axis(1)  # Left stick Y-axis
-            
                 
                 # Move the mouse
                 if abs(x_axis) > 0.1 or abs(y_axis > 0.1):  # Add a deadzone for better control
@@ -170,6 +169,17 @@ try:
                     if event.button == 1: # Circle with R2 pressed
                         keyboard.press(Key.ctrl)
                         keyboard.press('j')
+                    if event.button == 11: # Up with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('a')
+                    if event.button == 12: # Down with R2 pressed
+                        keyboard.press('0')
+                    if event.button == 13: # Left with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('z')
+                    if event.button == 14: # Right with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('y')
                 else:
                     if event.button == 0:  # X button
                         mouse.press(Button.left)  # Left mouse button down
@@ -194,7 +204,7 @@ try:
                         keyboard.press(Key.ctrl)
                         keyboard.press('s')
                     if event.button == 9: # L1
-                        keyboard.press(Key.ctrl)
+                        keyboard.press(Key.shift)
                     if event.button == 10: # R1
                         keyboard.press(Key.enter)
             elif event.type == pygame.JOYBUTTONUP:     
@@ -225,6 +235,17 @@ try:
                     if event.button == 1: # Circle with R2 pressed
                         keyboard.release(Key.ctrl)
                         keyboard.release('j')
+                    if event.button == 11: # Up with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('a')
+                    if event.button == 12: # Down with R2 pressed
+                        keyboard.release('0')
+                    if event.button == 13: # Left with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('z')
+                    if event.button == 14: # Right with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('y')
                 else:
                     if event.button == 0:  # X button      
                         mouse.release(Button.left)  
@@ -249,7 +270,7 @@ try:
                         keyboard.release(Key.ctrl)
                         keyboard.release('s')
                     if event.button == 9: # L1
-                        keyboard.release(Key.ctrl)
+                        keyboard.release(Key.shift)
                     if event.button == 10: # R1
                         keyboard.release(Key.enter)
                 
