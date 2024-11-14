@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "controller"
+version = "0.1.0"
+description = "A utility which allows control of computer functions through a video game controller"
+authors = ["Akimbo <https://soundcloud.com/akimbo_beats>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pygame = "2.6.1"
+pynput = "1.7.7"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
