@@ -42,6 +42,10 @@ trigger_threshold = 0.5  # Move this outside the loop for better readability
 # Initialize position deltas for smooth movement
 x_velocity = 0
 y_velocity = 0
+previous_x_move = 0
+previous_y_move = 0
+previous_x_scroll = 0
+previous_y_scroll = 0
 right_stick_x_velocity = 0
 right_stick_y_velocity = 0
 l2_press = False
@@ -67,15 +71,25 @@ try:
                 # Read the X and Y axis (usually axis 0 and 1 for left stick)
                 x_axis = controller.get_axis(0)  # Left stick X-axis
                 y_axis = controller.get_axis(1)  # Left stick Y-axis
-                
-                # Scale joystick values to mouse movement
-                # Joystick values are between -1 and 1; multiply by sensitivity
-                x_movement = int(x_axis * sensitivity)
-                y_movement = int(y_axis * sensitivity)
+            
                 
                 # Move the mouse
-                if abs(x_movement) > 0.1 or abs(y_movement > 0.1):  # Add a deadzone for better control
-                    mouse.move(x_movement, y_movement)
+                if abs(x_axis) > 0.1 or abs(y_axis > 0.1):  # Add a deadzone for better control
+                    # Smooth the movement by interpolating between previous and current values
+                    smooth_x_move = (1 - smoothing_factor) * previous_x_move + (smoothing_factor * x_axis)
+                    smooth_y_move = (1 - smoothing_factor) * previous_y_move + (smoothing_factor * y_axis)
+
+                    # Scale joystick values to mouse movement
+                    # Joystick values are between -1 and 1; multiply by sensitivity
+                    x_movement = int(x_axis * sensitivity)
+                    y_movement = int(y_axis * sensitivity)
+
+                    # Move the mouse
+                    mouse.move(x_movement, y_movement)  
+                    
+                    # Update previous positions for the next smoothing calculation
+                    previous_x_move = smooth_x_move
+                    previous_y_move = smooth_y_move
 
                 # Scrolling with Right Stick
                 # Right stick axes for scrolling
@@ -84,13 +98,17 @@ try:
 
                 # Vertical scrolling
                 if abs(y_scroll) > 0.1:  # Add a deadzone for better control
-                    scroll_amount = int(y_scroll * scroll_sensitivity)
+                    smooth_y_scroll = (1 - smoothing_factor) * previous_y_scroll + (smoothing_factor * y_scroll)
+                    scroll_amount = int(smooth_y_scroll * scroll_sensitivity)
                     mouse.scroll(0, -scroll_amount)
+                    previous_y_scroll = smooth_y_scroll
                 
                 # Horizontal scrolling
                 if abs(x_scroll) > 0.1:  # Add a deadzone for better control
-                    scroll_amount = int(x_scroll * scroll_sensitivity)
-                    mouse.scroll(scroll_amount, 0)
+                    smooth_x_scroll = (1 - smoothing_factor) * previous_x_scroll + (smoothing_factor * x_scroll)
+                    scroll_amount = int(smooth_x_scroll * scroll_sensitivity)
+                    mouse.scroll(-scroll_amount, 0)
+                    previous_x_scroll = smooth_x_scroll
 
                 # Handle L2 and R2 (Triggers as buttons)
                 if event.axis == 4:  # L2
@@ -139,7 +157,19 @@ try:
                         keyboard.press(Key.ctrl)
                         keyboard.press('d')
                 elif r2_press:
-                    print(r2_press)
+                    if event.button == 0: # X with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('e')
+                    if event.button == 2: # Square with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('g')
+                    if event.button == 3: # Triangle with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press(Key.shift)
+                        keyboard.press('g')
+                    if event.button == 1: # Circle with R2 pressed
+                        keyboard.press(Key.ctrl)
+                        keyboard.press('j')
                 else:
                     if event.button == 0:  # X button
                         mouse.press(Button.left)  # Left mouse button down
@@ -182,7 +212,19 @@ try:
                         keyboard.release(Key.ctrl)
                         keyboard.release('d')
                 elif r2_press:
-                    print(r2_press)
+                    if event.button == 0: # X with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('e')
+                    if event.button == 2: # Square with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('g')
+                    if event.button == 3: # Triangle with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release(Key.shift)
+                        keyboard.release('g')
+                    if event.button == 1: # Circle with R2 pressed
+                        keyboard.release(Key.ctrl)
+                        keyboard.release('j')
                 else:
                     if event.button == 0:  # X button      
                         mouse.release(Button.left)  
