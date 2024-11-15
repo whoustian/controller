@@ -107,7 +107,7 @@ if __name__ == "__main__":
                     if abs(x_scroll) > 0.1:  # Add a deadzone for better control
                         smooth_x_scroll = (1 - smoothing_factor) * previous_x_scroll + (smoothing_factor * x_scroll)
                         scroll_amount = int(smooth_x_scroll * scroll_sensitivity)
-                        mouse.scroll(-scroll_amount, 0)
+                        mouse.scroll(scroll_amount, 0)
                         previous_x_scroll = smooth_x_scroll
 
                     # Handle L2 and R2 (Triggers as buttons)
@@ -156,6 +156,10 @@ if __name__ == "__main__":
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.press(Key.ctrl)
                             keyboard.press('d')
+                        if event.button == 11: # Up with L2 pressed
+                            keyboard.press('+')
+                        if event.button == 12: # Down with L2 pressed
+                            keyboard.press('-')
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.press(Key.ctrl)
@@ -222,6 +226,10 @@ if __name__ == "__main__":
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.release(Key.ctrl)
                             keyboard.release('d')
+                        if event.button == 11: # Up with L2 pressed
+                            keyboard.release('+')
+                        if event.button == 12: # Down with L2 pressed
+                            keyboard.release('-')
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.release(Key.ctrl)
