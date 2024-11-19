@@ -11,7 +11,8 @@ if __name__ == "__main__":
 
     # Set up the controller
     if pygame.joystick.get_count() < 1:
-        print("No controller connected.")
+        print("No controller connected. Restart application after connecting controller.")
+        time.sleep(10)
         exit()
 
 
@@ -146,16 +147,17 @@ if __name__ == "__main__":
                     if l2_press:
                         if event.button == 0: # X with L2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('x')
+                            keyboard.press('e')
                         if event.button == 2: # Square with L2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('c')
+                            keyboard.press('g')
                         if event.button == 3: # Triangle with L2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('v')
+                            keyboard.press(Key.shift)
+                            keyboard.press('g')
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('d')
+                            keyboard.press('j')
                         if event.button == 11: # Up with L2 pressed
                             keyboard.press('+')
                         if event.button == 12: # Down with L2 pressed
@@ -163,17 +165,16 @@ if __name__ == "__main__":
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('e')
+                            keyboard.press('x')
                         if event.button == 2: # Square with R2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('g')
+                            keyboard.press('c')
                         if event.button == 3: # Triangle with R2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press(Key.shift)
-                            keyboard.press('g')
+                            keyboard.press('v')
                         if event.button == 1: # Circle with R2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('j')
+                            keyboard.press('d')
                         if event.button == 11: # Up with R2 pressed
                             keyboard.press(Key.ctrl)
                             keyboard.press('a')
@@ -216,16 +217,17 @@ if __name__ == "__main__":
                     if l2_press:
                         if event.button == 0: # X with L2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('x')
+                            keyboard.release('e')
                         if event.button == 2: # Square with L2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('c')
+                            keyboard.release('g')
                         if event.button == 3: # Triangle with L2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('v')
+                            keyboard.release(Key.shift)
+                            keyboard.release('g')
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('d')
+                            keyboard.release('j')
                         if event.button == 11: # Up with L2 pressed
                             keyboard.release('+')
                         if event.button == 12: # Down with L2 pressed
@@ -233,17 +235,16 @@ if __name__ == "__main__":
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('e')
+                            keyboard.release('x')
                         if event.button == 2: # Square with R2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('g')
+                            keyboard.release('c')
                         if event.button == 3: # Triangle with R2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release(Key.shift)
-                            keyboard.release('g')
+                            keyboard.release('v')
                         if event.button == 1: # Circle with R2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('j')
+                            keyboard.release('d')
                         if event.button == 11: # Up with R2 pressed
                             keyboard.release(Key.ctrl)
                             keyboard.release('a')
