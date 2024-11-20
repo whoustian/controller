@@ -124,7 +124,6 @@ if __name__ == "__main__":
                         else:
                             r2_press = False
 
-
                 # Handle button press events
                 # X = 0
                 # Square = 2
@@ -150,11 +149,9 @@ if __name__ == "__main__":
                             keyboard.press('e')
                         if event.button == 2: # Square with L2 pressed
                             keyboard.press(Key.ctrl)
-                            keyboard.press('g')
+                            keyboard.press('l')
                         if event.button == 3: # Triangle with L2 pressed
-                            keyboard.press(Key.ctrl)
-                            keyboard.press(Key.shift)
-                            keyboard.press('g')
+                            keyboard.press(Key.f9)
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.press(Key.ctrl)
                             keyboard.press('j')
@@ -198,6 +195,8 @@ if __name__ == "__main__":
                         if event.button == 3:  # Triangle button
                             keyboard.press(Key.shift)
                             keyboard.press(Key.tab)
+                        if event.button == 7: # L3
+                            mouse.press('a')
                         if event.button == 8: # R3
                             mouse.press(Button.right) 
                         if event.button == 11: # Up arrow
@@ -222,11 +221,9 @@ if __name__ == "__main__":
                             keyboard.release('e')
                         if event.button == 2: # Square with L2 pressed
                             keyboard.release(Key.ctrl)
-                            keyboard.release('g')
+                            keyboard.release('l')
                         if event.button == 3: # Triangle with L2 pressed
-                            keyboard.release(Key.ctrl)
-                            keyboard.release(Key.shift)
-                            keyboard.release('g')
+                            keyboard.release(Key.f9)
                         if event.button == 1: # Circle with L2 pressed
                             keyboard.release(Key.ctrl)
                             keyboard.release('j')
@@ -268,6 +265,8 @@ if __name__ == "__main__":
                         if event.button == 3:  # Triangle button
                             keyboard.release(Key.shift)
                             keyboard.release(Key.tab)
+                        if event.button == 7: # L3
+                            mouse.release('a')
                         if event.button == 8: # R3
                             mouse.release(Button.right) # Release right mouse button
                         if event.button == 11: # Up arrow

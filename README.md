@@ -13,8 +13,8 @@ R2 + X	        Ctrl + X	        Cut
 R2 + Square	    Ctrl + C	        Copy
 R2 + Triangle	Ctrl + V	        Paste
 R2 + Circle	    Ctrl + D	        Duplicate
-L2 + Square	    Shift + G	        Group
-L2 + Triangle	Ctrl + Shift + G	Ungroup
+L2 + Square     Ctrl + L            Loop
+L2 + Triangle   F9                  Record
 L2 + X	        Ctrl + E	        Chop
 L2 + Circle	    Ctrl + J	        Consolidate
 R2 + Up	        Ctrl + A	        Select All
@@ -24,3 +24,7 @@ L2 + Down       -                   Zoom Out
 L2 + Left	    Ctrl + Z 	        Undo
 L2 + Right	    Ctrl + Y	        Redo
 L2 + L1         Ctrl                Ctrl
+L3              A                   Toggle Automation Mode
+R2 + Left       No mapping (yet)
+R2 + Right      No mapping (yet)
+Select          No mapping (yet)
