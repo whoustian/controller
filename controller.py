@@ -111,7 +111,7 @@ if __name__ == "__main__":
                         mouse.scroll(scroll_amount, 0)
                         previous_x_scroll = smooth_x_scroll
 
-                    # Handle L2 and R2 (Triggers as buttons)
+                    # Detect L2 and R2 press
                     if event.axis == 4:  # L2
                         if event.value > trigger_threshold:
                             l2_press = True
@@ -143,6 +143,7 @@ if __name__ == "__main__":
                 # L2 = Axis 4
                 # R2 = Axis 5
                 elif event.type == pygame.JOYBUTTONDOWN:
+                    # L2 Pressed
                     if l2_press:
                         if event.button == 0: # X with L2 pressed
                             keyboard.press(Key.ctrl)
@@ -167,6 +168,7 @@ if __name__ == "__main__":
                         if event.button == 14: # Right with L2 pressed
                             keyboard.press(Key.ctrl)
                             keyboard.press('y')
+                    # R2 Pressed        
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.press(Key.ctrl)
@@ -185,6 +187,11 @@ if __name__ == "__main__":
                             keyboard.press('a')
                         if event.button == 12: # Down with R2 pressed
                             keyboard.press('0')
+                        if event.button == 13: # Left with R2 pressed
+                            keyboard.press('s')
+                        if event.button == 14: # Right with R2 pressed
+                            keyboard.press('c')
+                    # Nothing pressed
                     else:
                         if event.button == 0:  # X button
                             mouse.press(Button.left)  # Left mouse button down
@@ -196,7 +203,7 @@ if __name__ == "__main__":
                             keyboard.press(Key.shift)
                             keyboard.press(Key.tab)
                         if event.button == 7: # L3
-                            mouse.press('a')
+                            keyboard.press('a')
                         if event.button == 8: # R3
                             mouse.press(Button.right) 
                         if event.button == 11: # Up arrow
@@ -215,6 +222,7 @@ if __name__ == "__main__":
                         if event.button == 10: # R1
                             keyboard.press(Key.enter)
                 elif event.type == pygame.JOYBUTTONUP:     
+                    # L2 Pressed
                     if l2_press:
                         if event.button == 0: # X with L2 pressed
                             keyboard.release(Key.ctrl)
@@ -237,6 +245,7 @@ if __name__ == "__main__":
                         if event.button == 14: # Right with L2 pressed
                             keyboard.release(Key.ctrl)
                             keyboard.release('y')
+                    # R2 Pressed
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.release(Key.ctrl)
@@ -255,6 +264,11 @@ if __name__ == "__main__":
                             keyboard.release('a')
                         if event.button == 12: # Down with R2 pressed
                             keyboard.release('0')
+                        if event.button == 13: # Left with R2 pressed
+                            keyboard.release('s')
+                        if event.button == 14: # Right with R2 pressed
+                            keyboard.release('c')
+                    # Nothing pressed
                     else:
                         if event.button == 0:  # X button      
                             mouse.release(Button.left)  
@@ -266,7 +280,7 @@ if __name__ == "__main__":
                             keyboard.release(Key.shift)
                             keyboard.release(Key.tab)
                         if event.button == 7: # L3
-                            mouse.release('a')
+                            keyboard.release('a')
                         if event.button == 8: # R3
                             mouse.release(Button.right) # Release right mouse button
                         if event.button == 11: # Up arrow
