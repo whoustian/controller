@@ -162,6 +162,14 @@ if __name__ == "__main__":
                             keyboard.press('+')
                         if event.button == 12: # Down with L2 pressed
                             keyboard.press('-')
+                        if event.button == 9: # L1 with L2 pressed
+                            keyboard.press(Key.ctrl)
+                        if event.button == 13: # Left with L2 pressed
+                            keyboard.press(Key.ctrl)
+                            keyboard.press('z')
+                        if event.button == 14: # Right with L2 pressed
+                            keyboard.press(Key.ctrl)
+                            keyboard.press('y')
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.press(Key.ctrl)
@@ -180,12 +188,6 @@ if __name__ == "__main__":
                             keyboard.press('a')
                         if event.button == 12: # Down with R2 pressed
                             keyboard.press('0')
-                        if event.button == 13: # Left with R2 pressed
-                            keyboard.press(Key.ctrl)
-                            keyboard.press('z')
-                        if event.button == 14: # Right with R2 pressed
-                            keyboard.press(Key.ctrl)
-                            keyboard.press('y')
                     else:
                         if event.button == 0:  # X button
                             mouse.press(Button.left)  # Left mouse button down
@@ -232,6 +234,12 @@ if __name__ == "__main__":
                             keyboard.release('+')
                         if event.button == 12: # Down with L2 pressed
                             keyboard.release('-')
+                        if event.button == 13: # Left with L2 pressed
+                            keyboard.release(Key.ctrl)
+                            keyboard.release('z')
+                        if event.button == 14: # Right with L2 pressed
+                            keyboard.release(Key.ctrl)
+                            keyboard.release('y')
                     elif r2_press:
                         if event.button == 0: # X with R2 pressed
                             keyboard.release(Key.ctrl)
@@ -250,12 +258,6 @@ if __name__ == "__main__":
                             keyboard.release('a')
                         if event.button == 12: # Down with R2 pressed
                             keyboard.release('0')
-                        if event.button == 13: # Left with R2 pressed
-                            keyboard.release(Key.ctrl)
-                            keyboard.release('z')
-                        if event.button == 14: # Right with R2 pressed
-                            keyboard.release(Key.ctrl)
-                            keyboard.release('y')
                     else:
                         if event.button == 0:  # X button      
                             mouse.release(Button.left)  

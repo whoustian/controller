@@ -17,9 +17,10 @@ L2 + Square	    Shift + G	        Group
 L2 + Triangle	Ctrl + Shift + G	Ungroup
 L2 + X	        Ctrl + E	        Chop
 L2 + Circle	    Ctrl + J	        Consolidate
-R2 + Left	    Ctrl + Z 	        Undo
-R2 + Right	    Ctrl + Y	        Redo
 R2 + Up	        Ctrl + A	        Select All
 R2 + Down	    0	                Deactivate
 L2 + Up         +                   Zoom In
 L2 + Down       -                   Zoom Out
+L2 + Left	    Ctrl + Z 	        Undo
+L2 + Right	    Ctrl + Y	        Redo
+L2 + L1         Ctrl                Ctrl
