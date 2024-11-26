@@ -27,7 +27,8 @@ if __name__ == "__main__":
     keyboard = KeyboardController()
 
     # Mouse sensitivity and deadzone settings
-    sensitivity = 5.0  # Adjust for base speed
+    sensitivity = [1.5, 3.0, 5.0]  # Adjust for base speed
+    sensitivity_index = 0
     deadzone = 0.05  # Ignore small movements
     smoothing_factor = 0.1  # Lower for faster response
 
@@ -82,8 +83,8 @@ if __name__ == "__main__":
 
                         # Scale joystick values to mouse movement
                         # Joystick values are between -1 and 1; multiply by sensitivity
-                        x_movement = int(x_axis * sensitivity)
-                        y_movement = int(y_axis * sensitivity)
+                        x_movement = int(x_axis * sensitivity[sensitivity_index])
+                        y_movement = int(y_axis * sensitivity[sensitivity_index])
 
                         # Move the mouse
                         mouse.move(x_movement, y_movement)  
@@ -221,6 +222,11 @@ if __name__ == "__main__":
                             keyboard.press(Key.shift)
                         if event.button == 10: # R1
                             keyboard.press(Key.enter)
+                        if event.button == 4: # Select
+                            if sensitivity_index == 2:
+                                sensitivity_index = 0
+                            else:
+                                sensitivity_index += 1  
                 elif event.type == pygame.JOYBUTTONUP:     
                     # L2 Pressed
                     if l2_press:
@@ -298,6 +304,15 @@ if __name__ == "__main__":
                             keyboard.release(Key.shift)
                         if event.button == 10: # R1
                             keyboard.release(Key.enter)
+                        if event.button == 4: # Select
+                            sensitivity_profile = ''
+                            if sensitivity[sensitivity_index] == 1.5:
+                                sensitivity_profile = 'Low'
+                            elif sensitivity[sensitivity_index] == 3.0:
+                                sensitivity_profile = 'Medium'
+                            elif sensitivity[sensitivity_index] == 5.0:
+                                sensitivity_profile = 'High'
+                            print(f'Mouse sensitivity set to {sensitivity_profile}')
                     
             # Minimal delay to avoid excessive CPU usage
             time.sleep(0.001)

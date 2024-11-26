@@ -26,5 +26,5 @@ R2 + Up	        Ctrl + A	        Select All
 R2 + Down	    0	                Deactivate
 R2 + Left       S                   Solo selected track
 R2 + Right      C                   Arm selected track
-Select          No mapping (yet)
+Select          N/A                 Toggle mouse sensitivity
 Touchpad press  No mapping (yet)
