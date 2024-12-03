@@ -153,10 +153,10 @@ if __name__ == "__main__":
                             keyboard.press(Key.ctrl)
                             keyboard.press('l')
                         if event.button == 3: # Triangle with L2 pressed
-                            keyboard.press(Key.f9)
-                        if event.button == 1: # Circle with L2 pressed
                             keyboard.press(Key.ctrl)
                             keyboard.press('j')
+                        if event.button == 1: # Circle with L2 pressed
+                            keyboard.press(Key.f9)
                         if event.button == 11: # Up with L2 pressed
                             keyboard.press('+')
                         if event.button == 12: # Down with L2 pressed
@@ -237,10 +237,10 @@ if __name__ == "__main__":
                             keyboard.release(Key.ctrl)
                             keyboard.release('l')
                         if event.button == 3: # Triangle with L2 pressed
-                            keyboard.release(Key.f9)
-                        if event.button == 1: # Circle with L2 pressed
                             keyboard.release(Key.ctrl)
                             keyboard.release('j')
+                        if event.button == 1: # Circle with L2 pressed
+                            keyboard.release(Key.f9)
                         if event.button == 11: # Up with L2 pressed
                             keyboard.release('+')
                         if event.button == 12: # Down with L2 pressed
