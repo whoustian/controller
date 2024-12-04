@@ -15,9 +15,9 @@ R2 + Square	    Ctrl + C	        Copy
 R2 + Triangle	Ctrl + V	        Paste
 R2 + Circle	    Ctrl + D	        Duplicate
 L2 + Square     Ctrl + L            Loop
-L2 + Triangle   F9                  Consolidate
+L2 + Triangle   Ctrl + J            Consolidate
 L2 + X	        Ctrl + E	        Chop
-L2 + Circle	    Ctrl + J	        Record
+L2 + Circle	    F9      	        Record
 L2 + Up         +                   Zoom In
 L2 + Down       -                   Zoom Out
 L2 + Left	    Ctrl + Z 	        Undo
